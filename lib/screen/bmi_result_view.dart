@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 class BmiResultView extends StatelessWidget {
   final double bmi;
 
-  const BmiResultView({
-    super.key,
-    required this.bmi,
-  });
+  const BmiResultView({super.key, required this.bmi});
 
   String getResult() {
     if (bmi < 18.5) {
@@ -37,7 +34,14 @@ class BmiResultView extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xffF5F7FA),
       appBar: AppBar(
-        title: const Text("BMI Result"),
+        title: const Text(
+          "BMI Result",
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         centerTitle: true,
         backgroundColor: Colors.deepPurple,
       ),
@@ -51,10 +55,7 @@ class BmiResultView extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 gradient: LinearGradient(
-                  colors: [
-                    getColor(),
-                    getColor().withOpacity(0.7),
-                  ],
+                  colors: [getColor(), getColor().withOpacity(0.7)],
                 ),
                 boxShadow: [
                   BoxShadow(
@@ -66,8 +67,7 @@ class BmiResultView extends StatelessWidget {
               ),
               child: Center(
                 child: Column(
-                  mainAxisAlignment:
-                      MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       bmi.toStringAsFixed(1),
@@ -80,10 +80,7 @@ class BmiResultView extends StatelessWidget {
                     const SizedBox(height: 8),
                     const Text(
                       "BMI",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 22,
-                      ),
+                      style: TextStyle(color: Colors.white, fontSize: 22),
                     ),
                   ],
                 ),
@@ -116,10 +113,7 @@ class BmiResultView extends StatelessWidget {
               },
               child: const Text(
                 "Calculate Again",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                ),
+                style: TextStyle(color: Colors.white, fontSize: 18),
               ),
             ),
           ],
