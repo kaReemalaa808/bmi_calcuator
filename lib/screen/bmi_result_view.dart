@@ -20,74 +20,109 @@ class BmiResultView extends StatelessWidget {
     }
   }
 
+  Color getColor() {
+    if (bmi < 18.5) {
+      return Colors.orange;
+    } else if (bmi < 25) {
+      return Colors.green;
+    } else if (bmi < 30) {
+      return Colors.amber;
+    } else {
+      return Colors.red;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue.shade50,
+      backgroundColor: const Color(0xffF5F7FA),
       appBar: AppBar(
         title: const Text("BMI Result"),
         centerTitle: true,
+        backgroundColor: Colors.deepPurple,
       ),
       body: Center(
-        child: Card(
-          elevation: 8,
-          margin: const EdgeInsets.all(20),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(25),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(30),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Icon(
-                  Icons.favorite,
-                  color: Colors.red,
-                  size: 80,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              width: 230,
+              height: 230,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: LinearGradient(
+                  colors: [
+                    getColor(),
+                    getColor().withOpacity(0.7),
+                  ],
                 ),
-
-                const SizedBox(height: 20),
-
-                const Text(
-                  "Your BMI",
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
+                boxShadow: [
+                  BoxShadow(
+                    color: getColor().withOpacity(0.4),
+                    blurRadius: 20,
+                    spreadRadius: 5,
                   ),
-                ),
-
-                const SizedBox(height: 15),
-
-                Text(
-                  bmi.toStringAsFixed(1),
-                  style: const TextStyle(
-                    fontSize: 50,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-
-                const SizedBox(height: 15),
-
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 10,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Text(
-                    getResult(),
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 22,
+                ],
+              ),
+              child: Center(
+                child: Column(
+                  mainAxisAlignment:
+                      MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      bmi.toStringAsFixed(1),
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 50,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
+                    const SizedBox(height: 8),
+                    const Text(
+                      "BMI",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 22,
+                      ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
-          ),
+
+            const SizedBox(height: 40),
+
+            Text(
+              getResult(),
+              style: TextStyle(
+                fontSize: 32,
+                fontWeight: FontWeight.bold,
+                color: getColor(),
+              ),
+            ),
+
+            const SizedBox(height: 20),
+
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.deepPurple,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 40,
+                  vertical: 15,
+                ),
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text(
+                "Calculate Again",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
